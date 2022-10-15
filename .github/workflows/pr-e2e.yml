@@ -129,7 +129,7 @@ jobs:
       - name: Run end to end tests
         continue-on-error: true
         id: test
-        env:          
+        env:
           AWS_RUN_IDENTITY_TESTS: true
           AZURE_RUN_WORKLOAD_IDENTITY_TESTS: true
           E2E_IMAGE_TAG: ${{ needs.triage.outputs.image_tag }}
