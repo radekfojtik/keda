@@ -130,9 +130,9 @@ jobs:
         continue-on-error: true
         id: test
         env:          
-          AWS_RUN_IDENTITY_TESTS: true          
-          AZURE_RUN_WORKLOAD_IDENTITY_TESTS: true          
-          E2E_IMAGE_TAG: ${{ needs.triage.outputs.image_tag }}          
+          AWS_RUN_IDENTITY_TESTS: true
+          AZURE_RUN_WORKLOAD_IDENTITY_TESTS: true
+          E2E_IMAGE_TAG: ${{ needs.triage.outputs.image_tag }}
           TEST_CLUSTER_NAME: keda-pr-run
         run: |
           MESSAGE="${{ github.event.comment.body }}"
@@ -148,11 +148,6 @@ jobs:
         if: ${{ always() }}
         run: make e2e-test-clean
         env:
-          TF_AZURE_RESOURCE_GROUP: ${{ secrets.TF_AZURE_RESOURCE_GROUP }}
-          TF_AZURE_SP_APP_ID: ${{ secrets.TF_AZURE_SP_APP_ID }}
-          TF_AZURE_SP_KEY: ${{ secrets.TF_AZURE_SP_KEY }}
-          TF_AZURE_SP_TENANT: ${{ secrets.TF_AZURE_SP_TENANT }}
-          TF_AZURE_SUBSCRIPTION: ${{ secrets.TF_AZURE_SUBSCRIPTION }}
           TEST_CLUSTER_NAME: keda-pr-run
 
       - name: React to comment with success
