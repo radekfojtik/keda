@@ -1,7 +1,6 @@
-name: Reusable workflow to run e2e tests on main branch
-
+name: Test Terraform
 on:
-  workflow_call:
+  - pull_request
 
 jobs:
   e2e-tests:
@@ -18,6 +17,10 @@ jobs:
 
       - name: Register workspace path
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
+
+      - uses: oNaiPs/secrets-to-env-action@v1
+        with:
+          secrets: ${{ toJSON(secrets) }}
 
       - name: Run end to end tests
         env:
@@ -47,8 +50,6 @@ jobs:
           TF_AZURE_SP_OBJECT_ID: ${{ secrets.TF_AZURE_SP_OBJECT_ID }}
           TF_AZURE_SP_KEY: ${{ secrets.TF_AZURE_SP_KEY }}
           TF_AZURE_SP_ALTERNATIVE_APP_ID: ${{ secrets.TF_AZURE_SP_ALTERNATIVE_APP_ID }}
-          AZURE_SP_ALTERNATIVE_OBJECT_ID: ${{ secrets.AZURE_SP_ALTERNATIVE_OBJECT_ID }}
-          AZURE_SP_ALTERNATIVE_KEY: ${{ secrets.AZURE_SP_ALTERNATIVE_KEY }}
           TF_AZURE_SP_TENANT: ${{ secrets.TF_AZURE_SP_TENANT }}
           TF_AZURE_STORAGE_CONNECTION_STRING: ${{ secrets.TF_AZURE_STORAGE_CONNECTION_STRING }}
           TF_AZURE_SUBSCRIPTION: ${{ secrets.TF_AZURE_SUBSCRIPTION }}

@@ -35,9 +35,9 @@ const (
 var (
 	random                    = GetRandomNumber()
 	eventHubName              = fmt.Sprintf("keda-eh-%d", random)
-	namespaceConnectionString = os.Getenv("AZURE_EVENTHBUS_MANAGEMENT_CONNECTION_STRING")
+	namespaceConnectionString = os.Getenv("TF_AZURE_EVENTHBUS_MANAGEMENT_CONNECTION_STRING")
 	eventhubConnectionString  = fmt.Sprintf("%s;EntityPath=%s", namespaceConnectionString, eventHubName)
-	storageConnectionString   = os.Getenv("AZURE_STORAGE_CONNECTION_STRING")
+	storageConnectionString   = os.Getenv("TF_AZURE_STORAGE_CONNECTION_STRING")
 	checkpointContainerName   = fmt.Sprintf("keda-checkpoint-%d", random)
 	testNamespace             = fmt.Sprintf("%s-ns", testName)
 	secretName                = fmt.Sprintf("%s-secret", testName)
@@ -154,8 +154,8 @@ spec:
 func TestScaler(t *testing.T) {
 	// setup
 	t.Log("--- setting up ---")
-	require.NotEmpty(t, namespaceConnectionString, "AZURE_EVENTHBUS_MANAGEMENT_CONNECTION_STRING env variable is required for azure eventhub test")
-	require.NotEmpty(t, storageConnectionString, "AZURE_STORAGE_CONNECTION_STRING env variable is required for azure eventhub test")
+	require.NotEmpty(t, namespaceConnectionString, "TF_AZURE_EVENTHBUS_MANAGEMENT_CONNECTION_STRING env variable is required for azure eventhub test")
+	require.NotEmpty(t, storageConnectionString, "TF_AZURE_STORAGE_CONNECTION_STRING env variable is required for azure eventhub test")
 
 	adminClient, client := createEventHub(t)
 	container := createContainer(t)

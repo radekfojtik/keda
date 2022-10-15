@@ -148,7 +148,7 @@ func TestGetUnprocessedEventCountInPartition(t *testing.T) {
 	t.Logf("EventHub has 1 message in partition 0 and 0 messages in partition 1")
 
 	eventHubKey := os.Getenv("AZURE_EVENTHUB_KEY")
-	storageConnectionString := os.Getenv("AZURE_STORAGE_CONNECTION_STRING")
+	storageConnectionString := os.Getenv("TF_AZURE_STORAGE_CONNECTION_STRING")
 
 	if eventHubKey != "" && storageConnectionString != "" {
 		eventHubConnectionString := fmt.Sprintf("Endpoint=sb://%s.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=%s;EntityPath=%s", testEventHubNamespace, eventHubKey, testEventHubName)
@@ -235,7 +235,7 @@ func TestGetUnprocessedEventCountIfNoCheckpointExists(t *testing.T) {
 	t.Logf("EventHub has 1 message in partition 0 and 0 messages in partition 1")
 
 	eventHubKey := os.Getenv("AZURE_EVENTHUB_KEY")
-	storageConnectionString := os.Getenv("AZURE_STORAGE_CONNECTION_STRING")
+	storageConnectionString := os.Getenv("TF_AZURE_STORAGE_CONNECTION_STRING")
 
 	if eventHubKey != "" && storageConnectionString != "" {
 		eventHubConnectionString := fmt.Sprintf("Endpoint=sb://%s.servicebus.windows.net/;SharedAccessKeyName=RootManageSharedAccessKey;SharedAccessKey=%s;EntityPath=%s", testEventHubNamespace, eventHubKey, testEventHubName)

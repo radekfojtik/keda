@@ -31,7 +31,7 @@ const (
 )
 
 var (
-	connectionString = os.Getenv("AZURE_STORAGE_CONNECTION_STRING")
+	connectionString = os.Getenv("TF_AZURE_STORAGE_CONNECTION_STRING")
 	testNamespace    = fmt.Sprintf("%s-ns", testName)
 	secretName       = fmt.Sprintf("%s-secret", testName)
 	deploymentName   = fmt.Sprintf("%s-deployment", testName)
@@ -126,7 +126,7 @@ spec:
 func TestScaler(t *testing.T) {
 	// setup
 	t.Log("--- setting up ---")
-	require.NotEmpty(t, connectionString, "AZURE_STORAGE_CONNECTION_STRING env variable is required for azure blob test")
+	require.NotEmpty(t, connectionString, "TF_AZURE_STORAGE_CONNECTION_STRING env variable is required for azure blob test")
 
 	containerURL := createContainer(t)
 

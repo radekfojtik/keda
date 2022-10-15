@@ -28,7 +28,7 @@ const (
 )
 
 var (
-	connectionString = os.Getenv("AZURE_SERVICE_BUS_CONNECTION_STRING")
+	connectionString = os.Getenv("TF_AZURE_SERVICE_BUS_CONNECTION_STRING")
 	testNamespace    = fmt.Sprintf("%s-ns", testName)
 	secretName       = fmt.Sprintf("%s-secret", testName)
 	deploymentName   = fmt.Sprintf("%s-deployment", testName)
@@ -129,7 +129,7 @@ spec:
 func TestScaler(t *testing.T) {
 	// setup
 	t.Log("--- setting up ---")
-	require.NotEmpty(t, connectionString, "AZURE_SERVICE_BUS_CONNECTION_STRING env variable is required for service bus tests")
+	require.NotEmpty(t, connectionString, "TF_AZURE_SERVICE_BUS_CONNECTION_STRING env variable is required for service bus tests")
 
 	queueName1 := fmt.Sprintf("%s-1", queuePrefix)
 	setupServiceBusQueue(t, queueName1)
